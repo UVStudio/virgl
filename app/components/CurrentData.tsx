@@ -1,5 +1,6 @@
 import React from 'react';
 import { Weather, Coords } from '../page';
+import { convertTime } from '../utils/convertTime';
 
 const CurrentData = ({
   weather,
@@ -8,11 +9,7 @@ const CurrentData = ({
   weather: Weather | null;
   coords: Coords | null;
 }) => {
-  let timeConvert = 0;
-  if (coords) {
-    timeConvert = coords.timestamp;
-  }
-  const time = timeConvert !== 0 ? new Date(timeConvert).toLocaleString() : '';
+  const time = convertTime(coords);
 
   return (
     <div className="text-lg flex justify-end mt-5">
