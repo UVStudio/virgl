@@ -28,6 +28,9 @@ const DegreesToggle = ({
     fahrenheitWeight = 'bold';
   }
 
+  console.log('cel: ', celsiusWeight);
+  console.log('fah: ', fahrenheitWeight);
+
   return (
     <div className="w-full grid justify-end text-sm">
       <div className="flex w-full static w-auto">
