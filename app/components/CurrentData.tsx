@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { degreesContext } from '../contexts/degreesContext';
 import { Weather, Coords } from '../page';
 import { convertTime } from '../utils/convertTime';
+import { conversion } from '../utils/conversion';
 
 const CurrentData = ({
   weather,
@@ -9,6 +11,7 @@ const CurrentData = ({
   weather: Weather | null;
   coords: Coords | null;
 }) => {
+  const degrees = useContext(degreesContext);
   const time = convertTime(coords);
 
   return (
@@ -17,7 +20,12 @@ const CurrentData = ({
         <p className="text-white text-right">
           Temp:{' '}
           {weather?.current_weather &&
-            weather.current_weather.temperature + ' C'}
+            (degrees === 'C'
+              ? weather.current_weather.temperature
+              : conversion(weather.current_weather.temperature)
+            ).toFixed(2) +
+              ' ' +
+              degrees}
         </p>
         <p className="text-white text-right">Date: {time}</p>
       </div>

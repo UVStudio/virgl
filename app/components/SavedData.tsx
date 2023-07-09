@@ -1,6 +1,8 @@
-import React, { useState, useEffect, ReactNode } from 'react';
-import { Coords } from '../page';
+import React, { useState, useEffect, useContext } from 'react';
+import { degreesContext } from '../contexts/degreesContext';
 import { populateRecords } from '../utils/populateRecords';
+import { conversion } from '../utils/conversion';
+import { Coords } from '../page';
 
 const SavedData = ({
   coords,
@@ -10,10 +12,12 @@ const SavedData = ({
 }: {
   coords: Coords | null;
   liveUpdate: boolean;
-  saveTemp: (setTempArray: any) => void;
-  toggleLiveUpdate: (x: any) => void;
+  saveTemp: (setTempArray: (x: string[]) => void) => void;
+  toggleLiveUpdate: () => void;
 }) => {
-  const [tempArray, setTempArray] = useState<any>(); //<Array<string>> doesn't work for TS
+  const [tempArray, setTempArray] = useState<string[]>();
+
+  const degrees = useContext(degreesContext);
 
   useEffect(() => {
     populateRecords(setTempArray);
@@ -24,14 +28,22 @@ const SavedData = ({
     setTempArray([]);
   };
 
-  // console.log('live update: ', liveUpdate);
+  const arrayItemConversion = (str: string) => {
+    return (
+      conversion(Number(str.substring(0, str.indexOf(' '))))
+        .toFixed(2)
+        .toString() +
+      ' F' +
+      str.slice(-23)
+    );
+  };
 
   return (
     <div className="md:flex flex-row sm:grid mt-8">
       <div className="basis-3/5 py-7 h-64 rounded-lg bg-slate-100 opacity-90 grid justify-items-center">
         {tempArray?.map((item: string) => (
           <p key={Math.random()} className="bg-slate-100 py-2">
-            {item}
+            {degrees === 'C' ? item : arrayItemConversion(item)}
           </p>
         ))}
       </div>
@@ -40,7 +52,7 @@ const SavedData = ({
           onClick={toggleLiveUpdate}
           className="bg-white rounded-full w-6/12 h-10 bg-slate-200 hover:bg-white active:bg-slate-500 active:text-white"
         >
-          {liveUpdate ? 'Live On' : 'Live Off'}
+          {liveUpdate ? 'Live: On' : 'Live: Off'}
         </button>
         <p className="text-white my-3 text-sm">
           Location:{' '}

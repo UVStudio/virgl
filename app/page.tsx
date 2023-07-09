@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { degreesContext } from './contexts/degreesContext';
 import DegreesToggle from './components/DegreesToggle';
 import CurrentData from './components/CurrentData';
 import SavedData from './components/SavedData';
@@ -35,6 +36,7 @@ export default function Home() {
   const [coords, setCoords] = useState<Coords | null>(null);
   const [weather, setWeather] = useState<Weather | null>(null);
   const [liveUpdate, setLiveUpdate] = useState(true);
+  const [toggleDegrees, setToggleDegrees] = useState('C');
 
   const toggleLiveUpdate = () => {
     setLiveUpdate((value) => !value);
@@ -64,7 +66,7 @@ export default function Home() {
           fetchWeatherAPI();
           fetchLocationAPI();
           console.log('weather API called');
-        }, 30000);
+        }, 3000);
         return () => {
           clearInterval(interval);
         };
@@ -83,14 +85,16 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex-col items-center justify-between p-10 mx-6">
-      <DegreesToggle />
-      <CurrentData weather={weather} coords={coords} />
-      <SavedData
-        coords={coords}
-        liveUpdate={liveUpdate}
-        saveTemp={saveTemp}
-        toggleLiveUpdate={toggleLiveUpdate}
-      />
+      <degreesContext.Provider value={toggleDegrees}>
+        <DegreesToggle setToggleDegrees={setToggleDegrees} />
+        <CurrentData weather={weather} coords={coords} />
+        <SavedData
+          coords={coords}
+          liveUpdate={liveUpdate}
+          saveTemp={saveTemp}
+          toggleLiveUpdate={toggleLiveUpdate}
+        />
+      </degreesContext.Provider>
     </main>
   );
 }
