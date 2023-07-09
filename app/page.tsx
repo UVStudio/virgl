@@ -76,10 +76,16 @@ export default function Home() {
 
   const saveTemp = (setTempArray: (item: string[]) => void) => {
     const time = convertTime(new Date());
-    localStorage.setItem(
-      `virgl-weather-${Date.now()}`,
-      `${weather!.current_weather.temperature.toString()} C : ${time}`
-    );
+    const newEntry = `${weather!.current_weather.temperature.toString()} C : ${time}`;
+
+    if (localStorage.getItem('virglWeather')) {
+      const array = JSON.parse(localStorage.getItem('virglWeather') || '{}');
+      array.push(newEntry);
+      localStorage.setItem('virglWeather', JSON.stringify(array));
+    } else {
+      localStorage.setItem('virglWeather', JSON.stringify([newEntry]));
+    }
+
     populateRecords(setTempArray);
   };
 
