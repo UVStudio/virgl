@@ -1,18 +1,12 @@
 import React, { useContext } from 'react';
 import { degreesContext } from '../contexts/degreesContext';
-import { Weather, Coords } from '../page';
+import { Weather } from '../page';
 import { convertTime } from '../utils/convertTime';
 import { conversion } from '../utils/conversion';
 
-const CurrentData = ({
-  weather,
-  coords,
-}: {
-  weather: Weather | null;
-  coords: Coords | null;
-}) => {
+const CurrentData = ({ weather }: { weather: Weather | null }) => {
   const degrees = useContext(degreesContext);
-  const time = convertTime(coords);
+  const time = convertTime(new Date());
 
   return (
     <div className="text-lg flex justify-end mt-5">
@@ -23,7 +17,7 @@ const CurrentData = ({
             (degrees === 'C'
               ? weather.current_weather.temperature
               : conversion(weather.current_weather.temperature)
-            ).toFixed(2) +
+            ).toFixed(1) +
               ' ' +
               degrees}
         </p>

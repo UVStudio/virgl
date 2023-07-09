@@ -24,7 +24,11 @@ const SavedData = ({
   }, []);
 
   const clearData = () => {
-    localStorage.clear();
+    for (const key in localStorage) {
+      if (key.slice(0, 13) === 'virgl-weather') {
+        localStorage.removeItem(key);
+      }
+    }
     setTempArray([]);
   };
 

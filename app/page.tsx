@@ -75,7 +75,7 @@ export default function Home() {
   }, [coords, liveUpdate, fetchWeatherAPI, fetchLocationAPI]);
 
   const saveTemp = (setTempArray: (item: string[]) => void) => {
-    const time = convertTime(coords);
+    const time = convertTime(new Date());
     localStorage.setItem(
       `virgl-weather-${Date.now()}`,
       `${weather!.current_weather.temperature.toString()} C : ${time}`
@@ -87,7 +87,7 @@ export default function Home() {
     <main className="min-h-screen flex-col items-center justify-between p-10 mx-6">
       <degreesContext.Provider value={toggleDegrees}>
         <DegreesToggle setToggleDegrees={setToggleDegrees} />
-        <CurrentData weather={weather} coords={coords} />
+        <CurrentData weather={weather} />
         <SavedData
           coords={coords}
           liveUpdate={liveUpdate}
