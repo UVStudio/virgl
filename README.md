@@ -28,7 +28,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Deviations from Specifications
 
-_There must be a **button** to store the current temperature reading, and **another button** to show the five most recently stored temperature readings._
+> There must be a **button** to store the current temperature reading, and **another button** to show the five most recently stored temperature readings.
 
 - This has been combined into one **button**, the author feels that it provides a better user experience. Also, the maximum of 5 most recent temperature readings will render upon initial page load using `useEffect`.
 
