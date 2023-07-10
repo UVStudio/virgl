@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a weather app for virgl.io.
 
 ## Getting Started
 
@@ -14,21 +14,34 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Specifications
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- The web application must use **Next.js** and **React** function components (not React class components), and ideally, hooks
+  - Otherwise, the application can use any other libraries.
+  - ES6 is OK, but if you are up for a challenge, try to build it with Typescript.
+- The temperature and timestamp must update automatically every 60s.
+- There must be a Play/Pause button to temporarily stop the data from updating.
+- There must be a **button** to store the current temperature reading, and **another button** to show the five most recently stored temperature readings.
+- The design must be **responsive** - feel free to make use of additional libraries to achieve this.
+- The temperature value must come from a third party API (details below).
+- The design and UX/UI of the app is left up to you. A simple design will work well, but feel free to show your creativity as well.
 
-## Learn More
+### Deviations from Specifications
 
-To learn more about Next.js, take a look at the following resources:
+_There must be a **button** to store the current temperature reading, and **another button** to show the five most recently stored temperature readings._
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- This has been combined into one **button**, the author feels that it provides a better user experience. Also, the maximum of 5 most recent temperature readings will render upon initial page load using `useEffect`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `Windows.Navigator` has been added. Its lat/long data is used to fetch temperature data.
 
-## Deploy on Vercel
+- A Celsius / Fahrenheit toggle has been added for users to switch from one to the other. All temperature readings are fetched and saved as Celsius. The toggle simply changes the UI output.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- A **Clear Data** button has been added to allow users to clean all saved temperature data from **localStorage**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Video demonstration
+
+- The Live update has been set to every 3 seconds for demonstration purposes.
+
+## Outstanding issues
+
+- The browser sometimes gives a 'hydration' warning message. It does not affect the functionalities of the app.
