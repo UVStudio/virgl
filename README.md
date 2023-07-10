@@ -2,7 +2,7 @@ This is a weather app for virgl.io.
 
 ## Getting Started
 
-First, run the development server:
+First, download the codebase. Then, run the development server:
 
 ```bash
 npm run dev
