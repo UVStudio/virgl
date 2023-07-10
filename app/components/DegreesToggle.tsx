@@ -21,11 +21,11 @@ const DegreesToggle = ({
   let fahrenheitWeight = 'normal';
 
   if (selection === 'C') {
-    celsiusWeight = 'bold';
-    fahrenheitWeight = 'normal';
+    celsiusWeight = 'font-bold';
+    fahrenheitWeight = 'font-normal';
   } else if (selection === 'F') {
-    celsiusWeight = 'normal';
-    fahrenheitWeight = 'bold';
+    celsiusWeight = 'font-normal';
+    fahrenheitWeight = 'font-bold';
   }
 
   return (
@@ -33,14 +33,14 @@ const DegreesToggle = ({
       <div className="flex w-full static w-auto">
         <p
           onClick={toCelsius}
-          className={`flex place-items-center text-slate-200 font-${celsiusWeight} hover:text-white hover:cursor-pointer`}
+          className={`flex place-items-center text-slate-200 ${celsiusWeight} hover:text-white hover:cursor-pointer`}
         >
           Celsius&nbsp;&nbsp;
         </p>
         <p className="text-slate-200">/</p>
         <p
           onClick={toFahrenheit}
-          className={`flex place-items-center text-slate-200 font-${fahrenheitWeight} hover:text-white hover:cursor-pointer`}
+          className={`flex place-items-center text-slate-200 ${fahrenheitWeight} hover:text-white hover:cursor-pointer`}
         >
           &nbsp;&nbsp;Fahrenheit
         </p>

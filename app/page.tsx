@@ -66,7 +66,7 @@ export default function Home() {
           fetchWeatherAPI();
           fetchLocationAPI();
           console.log('weather API called');
-        }, 3000);
+        }, 60000);
         return () => {
           clearInterval(interval);
         };
