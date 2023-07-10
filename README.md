@@ -41,6 +41,7 @@ _There must be a **button** to store the current temperature reading, and **anot
 ## Video demonstration
 
 - The Live update has been set to every 3 seconds for demonstration purposes.
+  [Video Link](https://www.youtube.com/watch?v=OvGSSFPkiRU)
 
 ## Outstanding issues
 
