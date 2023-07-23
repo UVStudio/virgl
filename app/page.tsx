@@ -13,9 +13,6 @@ import { populateRecords } from './utils/populateRecords';
 export interface Weather {
   latitude: number;
   longitude: number;
-  timezone: string;
-  timezone_bbreviation: string;
-  utc_offset_seconds: number;
   current_weather: {
     is_day: number;
     temperature: number;
